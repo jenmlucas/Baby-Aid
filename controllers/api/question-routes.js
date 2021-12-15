@@ -5,81 +5,81 @@ const sequelize = require('../../config/connection');
 
 // get all users
 router.get('/', (req, res) => {
-    Question.findAll({
-        // Query configuration
-        attributes: [
-            'id',
-            'content',
-            'title',
-            'created_at',
-            [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE question.id = vote.question_id)'), 'vote_count']
-        ],
-        order: [['created_at', 'DESC']],
-        include: [
-            // include the Comment model here:
-            {
-                model: Answer,
-                attributes: ['id', 'answer_text', 'question_id', 'parent_id', 'created_at'],
-                include: {
-                    model: Parent,
-                    attributes: ['username']
-                }
-            },
-            {
-                model: Parent,
-                attributes: ['username']
-            }
-        ]
-    })
+  Question.findAll({
+    // Query configuration
+    attributes: [
+      'id',
+      'content',
+      'title',
+      'created_at',
+      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE question.id = vote.question_id)'), 'vote_count']
+    ],
+    order: [['created_at', 'DESC']],
+    include: [
+      // include the Comment model here:
+      {
+        model: Answer,
+        attributes: ['id', 'answer_text', 'question_id', 'parent_id', 'created_at'],
+        include: {
+          model: Parent,
+          attributes: ['username']
+        }
+      },
+      {
+        model: Parent,
+        attributes: ['username']
+      }
+    ]
+  })
     .then(dbPostData => res.json(dbPostData))
     .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-     });
-    });     
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
 
 router.get('/:id', (req, res) => {
-   Question.findOne({
-        where: {
-          id: req.params.id
-        },
-        attributes: [
-          'id',
-          'content',
-          'title',
-          'created_at',
-          [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE question.id = vote.question_id)'), 'vote_count']
-        ],
-        include: [
-          {
-            model: Answer,
-            attributes: ['id', 'answer_text', 'question_id', 'parent_id', 'created_at'],
-            include: {
-              model: Parent,
-              attributes: ['username']
-            }
-          },
-          {
-            model: Parent,
-            attributes: ['username']
-          }
-        ]
-      })
-        .then(dbPostData => {
-          if (!dbPostData) {
-            res.status(404).json({ message: 'No post found with this id' });
-            return;
-          }
-          res.json(dbPostData);
-        })
-        .catch(err => {
-          console.log(err);
-          res.status(500).json(err);
-        });
+  Question.findOne({
+    where: {
+      id: req.params.id
+    },
+    attributes: [
+      'id',
+      'content',
+      'title',
+      'created_at',
+      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE question.id = vote.question_id)'), 'vote_count']
+    ],
+    include: [
+      {
+        model: Answer,
+        attributes: ['id', 'answer_text', 'question_id', 'parent_id', 'created_at'],
+        include: {
+          model: Parent,
+          attributes: ['username']
+        }
+      },
+      {
+        model: Parent,
+        attributes: ['username']
+      }
+    ]
+  })
+    .then(dbPostData => {
+      if (!dbPostData) {
+        res.status(404).json({ message: 'No post found with this id' });
+        return;
+      }
+      res.json(dbPostData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.post('/', (req, res) => {
-    // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
+  // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
   Question.create({
     title: req.body.title,
     content: req.body.content,
@@ -96,35 +96,35 @@ router.post('/', (req, res) => {
 router.put('/vote', (req, res) => {
   // make sure the session exists first
   if (req.session) {
-    // pass session id along with all destructured properties on req.body
-    // custom static method created in models/Post.js
-    Question.vote({ ...req.body, parent_id: req.session.parent_id }, { Vote, Answer, Parent })
-      .then(updatedVoteData => res.json(updatedVoteData))
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+  // pass session id along with all destructured properties on req.body
+  // custom static method created in models/Post.js
+  Question.vote({ ...req.body, parent_id: req.session.parent_id }, { Vote, Answer, Parent })
+    .then(updatedVoteData => res.json(updatedVoteData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
   }
 });
 
 
-router.delete('/:id',  (req, res) => {
-    Question.destroy({
-        where: {
-            id: req.params.id
-        }
+router.delete('/:id', (req, res) => {
+  Question.destroy({
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(dbPostData => {
+      if (!dbPostData) {
+        res.status(404).json({ message: ' No post found with this id' });
+        return;
+      }
+      res.json(dbPostData);
     })
-        .then(dbPostData => {
-            if (!dbPostData) {
-                res.status(404).json({ message: ' No post found with this id' });
-                return;
-            }
-            res.json(dbPostData);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 module.exports = router;
