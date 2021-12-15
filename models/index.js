@@ -18,8 +18,6 @@ Parent.belongsToMany(Question, {
     foreignKey: 'parent_id'
 });
 
-// setting relationship
-// one Question can belong to many parents
 Question.belongsToMany(Parent, {
     through: Vote,
     as: 'voted_questions',
