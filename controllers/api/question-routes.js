@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Question, Parent, Vote, Answer } = require('../../models');
 const sequelize = require('../../config/connection');
-const withAuth = require('../../utils/auth');
+// const withAuth = require('../../utils/auth');
 
 // get all users
 router.get('/', (req, res) => {
@@ -78,9 +78,9 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/', withAuth, (req, res) => {
+router.post('/', (req, res) => {
     // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
-  Post.create({
+  Question.create({
     title: req.body.title,
     content: req.body.content,
     parent_id: req.session.parent_id
@@ -93,7 +93,7 @@ router.post('/', withAuth, (req, res) => {
 });
 
 // PUT /api/posts/upvote
-router.put('/vote', withAuth, (req, res) => {
+router.put('/vote', (req, res) => {
   // make sure the session exists first
   if (req.session) {
     // pass session id along with all destructured properties on req.body
@@ -108,7 +108,7 @@ router.put('/vote', withAuth, (req, res) => {
 });
 
 
-router.delete('/:id', withAuth, (req, res) => {
+router.delete('/:id',  (req, res) => {
     Question.destroy({
         where: {
             id: req.params.id

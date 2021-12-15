@@ -3,8 +3,8 @@ const parentRoutes = require('./parent-routes');
 const questionRoutes = require('./question-routes');
 // const answersRoutes = require('./answers-routes');
 
-router.use('/users', parentRoutes);
+router.use('/parents', parentRoutes);
 router.use('/questions', questionRoutes);
-// router.use('/comments', answerRoutes);
+// router.use('/answers', answerRoutes);
 
 module.exports = router;
