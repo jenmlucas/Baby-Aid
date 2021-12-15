@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 //turn on routes 
-// app.use(require('./controllers/'));  -- DONT FORGET TO UNCOMMENT ME ONCE CONTROLLERS HAS CONTENT
+app.use(require('./controllers/')); 
 
 //turn on the connection to db and server
 sequelize.sync({ force: false}).then(() => {
