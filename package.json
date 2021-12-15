@@ -1,0 +1,32 @@
+{
+  "name": "baby-aid",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jenmlucas/Baby-Aid.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jenmlucas/Baby-Aid/issues"
+  },
+  "homepage": "https://github.com/jenmlucas/Baby-Aid#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "connect-session-sequelize": "^7.1.2",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^6.0.2",
+    "express-session": "^1.17.2",
+    "handlebars.moment": "^1.0.4",
+    "moment": "^2.29.1",
+    "mysql2": "^2.3.3"
+  }
+}
