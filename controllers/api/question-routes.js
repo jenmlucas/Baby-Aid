@@ -83,7 +83,7 @@ router.post('/', (req, res) => {
   Question.create({
     title: req.body.title,
     content: req.body.content,
-    parent_id: req.session.parent_id
+    parent_id: req.body.parent_id
   })
     .then(dbPostData => res.json(dbPostData))
     .catch(err => {
