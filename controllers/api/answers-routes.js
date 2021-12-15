@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
                 id: req.params.id
             }
         })
-        then(dbUserData => {
+        .then(dbUserData => {
             if (!dbUserData) {
                 res.status(404).json({message:'No answer found with this id'});
                 return;
