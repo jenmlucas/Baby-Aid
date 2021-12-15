@@ -18,8 +18,8 @@ router.get('/', (req, res) => {
         include: [
             // include the Comment model here:
             {
-                model: Question,
-                attributes: ['id', 'content', 'question_id', 'parent_id', 'created_at'],
+                model: Answer,
+                attributes: ['id', 'answer_text', 'question_id', 'parent_id', 'created_at'],
                 include: {
                     model: Parent,
                     attributes: ['username']
@@ -52,8 +52,8 @@ router.get('/:id', (req, res) => {
         ],
         include: [
           {
-            model: Question,
-            attributes: ['id', 'content', 'question_id', 'parent_id', 'created_at'],
+            model: Answer,
+            attributes: ['id', 'answer_text', 'question_id', 'parent_id', 'created_at'],
             include: {
               model: Parent,
               attributes: ['username']

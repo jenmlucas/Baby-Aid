@@ -8,7 +8,7 @@ class Question extends Model {
             parent_id: body.parent_id,
             question_id: body.question_id
         }).then(() => {
-            return Post.findOne({
+            return Question.findOne({
                 where: {
                     id: body.question_id
                 },
