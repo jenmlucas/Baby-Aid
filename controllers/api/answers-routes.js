@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Answer } = require('../../models');
+const withAuth = require('../../utils/auth')
 
 router.get('/', (req, res) => {
     Answer.findAll()
@@ -12,22 +13,21 @@ router.get('/', (req, res) => {
 
 
 
-router.post('/', (req, res) => {
-    Answer.create({
-        answer_text: req.body.answer_text,
-        parent_id: req.body.parent_id,
-        question_id: req.body.question_id
-    })
+router.post('/', withAuth, (req, res) => {
+        Answer.create({
+            answer_text: req.body.answer_text,
+            parent_id: req.session.parent_id,
+            question_id: req.body.question_id
+        })
         .then(dbCommentData => res.json(dbCommentData))
         .catch(err => {
             console.log(err);
             res.status(400).json(err);
         });
-
 });
 
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     Answer.destroy({
         where: {
             id: req.params.id
