@@ -20,13 +20,19 @@ const sess = {
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
-    db: sequelize
+    db: sequelize,
+    checkExpirationInterval: 15 * 60 * 1000, // The interval at which to cleanup expired sessions in milliseconds.
+    expiration: 24 * 60 * 60 * 1000 // The maximum age (in milliseconds) of a valid session.
   })
 };
 
 app.use(session(sess));
 
-const hbs = exphbs.create({});
+const helpers = require('./utils/helpers');
+
+const hbs = exphbs.create({
+  helpers
+});
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
@@ -39,6 +45,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('./controllers/'));  
 
 //turn on the connection to db and server
-sequelize.sync({ force: true}).then(() => {
+sequelize.sync({ force: false}).then(() => {
     app.listen(PORT, () => console.log('Now listening'));
 });

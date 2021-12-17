@@ -1,0 +1,34 @@
+<article>
+    <a href="/dashboard"> &larr; Back to dashboard</a>
+    <h2>
+        Edit Question
+    </h2>
+    <form class="edit-question-form">
+        <div>
+            <input name="question-title" type="text" value="{{question.title}}" />
+        </div>
+        <div>
+            {{question.vote_count}} {{format_plural "point" question.vote_count}} by you on {{moment question.created_at format="ddd DD/MM/YYYY HH:mm A"}}
+            |
+            <a href="/post/{{question.id}}">{{question.comments.length}} {{format_plural "comment" question.comments.length}}</a>
+        </div>
+        <button type="submit">Save Question</button>
+        <button type="button" class="delete-question-btn">Delete Question</button>
+    </form>
+</article>
+
+<form class="answer-form">
+    <div>
+        <textarea name="answer-body"></textarea>
+    </div>
+
+    <div>
+        <button type="submit">add answer</button>
+    </div>
+</form>
+
+{{> answer question.answers}}
+
+<script src="/javascript/edit-question.js"></script>
+<script src="/javascript/delete-question.js"></script>
+<script src="/javascript/answer.js"></script>

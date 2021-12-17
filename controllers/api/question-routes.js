@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Question, Parent, Vote, Answer } = require('../../models');
 const sequelize = require('../../config/connection');
-// const withAuth = require('../../utils/auth');
+const withAuth = require('../../utils/auth');
 
 // get all users
 router.get('/', (req, res) => {
@@ -16,7 +16,6 @@ router.get('/', (req, res) => {
     ],
     order: [['created_at', 'DESC']],
     include: [
-      // include the Comment model here:
       {
         model: Answer,
         attributes: ['id', 'answer_text', 'question_id', 'parent_id', 'created_at'],
@@ -78,12 +77,11 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
-  // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
+router.post('/', withAuth, (req, res) => {
   Question.create({
     title: req.body.title,
     content: req.body.content,
-    parent_id: req.body.parent_id
+    parent_id: req.session.parent_id
   })
     .then(dbPostData => res.json(dbPostData))
     .catch(err => {
@@ -92,12 +90,8 @@ router.post('/', (req, res) => {
     });
 });
 
-// PUT /api/posts/upvote
-router.put('/vote', (req, res) => {
-  // make sure the session exists first
+router.put('/vote', withAuth, (req, res) => {
   if (req.session) {
-  // pass session id along with all destructured properties on req.body
-  // custom static method created in models/Post.js
   Question.vote({ ...req.body, parent_id: req.session.parent_id }, { Vote, Answer, Parent })
     .then(updatedVoteData => res.json(updatedVoteData))
     .catch(err => {
@@ -108,7 +102,7 @@ router.put('/vote', (req, res) => {
 });
 
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
   Question.destroy({
     where: {
       id: req.params.id

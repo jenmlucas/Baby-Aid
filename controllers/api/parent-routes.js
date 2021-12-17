@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Parent, Question, Vote, Answer } = require("../../models");
-
+const withAuth = require('../../utils/auth')
 
 // Get all Parents
 router.get('/', (req, res) => {
@@ -17,6 +17,7 @@ router.get('/', (req, res) => {
 // Get a single parents
 router.get('/:id', (req, res) => {
     Parent.findOne({
+        attributes: { exclude: ['password'] },
         where: {
             id: req.params.id
         },
@@ -29,8 +30,8 @@ router.get('/:id', (req, res) => {
                 model: Answer,
                 attributes: ['id', 'answer_text', 'parent_id', 'question_id', 'created_at'],
                 include: {
-                    model: Parent,
-                    attributes: ['username']
+                    model: Question,
+                    attributes: ['title']
                 }
             },
             {
@@ -62,7 +63,15 @@ router.post('/', (req, res) => {
         email: req.body.email,
         password: req.body.password
     })
-    .then(dbParentData => res.json(dbParentData))
+    .then(dbParentData => {
+        req.session.save(() => {
+            req.session.parent_id = dbParentData.id,
+            req.session.username = dbParentData.username,
+            req.session.loggedIn = true;
+
+            res.json(dbParentData)
+        })
+    })
     .catch(err => {
         console.log(err)
         res.status(500).json(err)
@@ -87,13 +96,30 @@ router.post('/login', (req, res) => {
             res.status(400).json({ message: 'Wrong password' })
             return
         }
-        res.json(dbParentData)
+        req.session.save(() => {
+            req.session.parent_id = dbParentData.id,
+            req.session.username = dbParentData.username,
+            req.session.loggedIn = true;
+
+            res.json({ parent: dbParentData, message: 'You have been logged in'})
+        })
     })
     .catch(err => {
         console.log(err)
         res.status(500).json(err)
     })
 })
+
+// Logout a parent
+router.post('/logout', (req, res) => {
+    if(req.session.loggedIn) {
+        req.session.destroy(() => {
+            res.status(204).end()
+        });
+    } else {
+        res.status(404).end()
+    }
+});
 
 
 

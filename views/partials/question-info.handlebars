@@ -1,0 +1,11 @@
+<article>
+    <div>
+        {{title}}
+        {{content}}
+    </div>
+    <div>
+        {{vote_count}} {{format_plural "point" vote_count}} by {{parent.username}} on {{moment created_at format="ddd DD/MM/YYYY HH:mm A"}}
+        |
+        <a href="/question/{{id}}">{{answers.length}} {{format_plural "answer" answers.length}}</a>
+    </div>
+</article>
