@@ -1,0 +1,12 @@
+<div class="answers">
+    {{#each this}}
+    <section class="answer">
+        <div class="meta">
+            {{answer.username}} on {{moment created_at format="ddd DD/MM/YYYY HH:mm A"}}
+        </div>
+        <div class="text">
+            {{answer_text}}
+        </div>
+    </section>
+    {{/each}}
+</div>
