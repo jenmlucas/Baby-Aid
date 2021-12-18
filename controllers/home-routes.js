@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Question, Parent, Answer } = require('../models');
+const { Question, Parent, Answer, Vote } = require('../models');
 
 router.get('/', (req, res) => {
     Question.findAll({
@@ -64,19 +64,31 @@ router.get('/question/:id', (req, res) => {
         include: [
             {
                 model: Answer,
-                attributes: ['id', 'answer_text', 'question_id', 'parent_id', 'created_at'],
-                include: {
+                attributes: ['id', 'answer_text', 'question_id', 'parent_id', 'created_at',
+                [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE answer_id = vote.answer_id)'), 'vote_count']
+            ],
+                include: [
+                    {
                     model: Parent,
                     attributes: ['username']
-                }
+                    },
+                    {
+                    model: Vote,
+                    attribute: ['id']
+                    }
+                ]
             },
             {
                 model: Parent,
                 attributes: ['username']
             }
+            
         ]
     })
         .then(dbQuestionData => {
+            ///.map somewhere in here! 
+            console.log(dbQuestionData)
+            console.log(dbQuestionData.dataValues.answers)
             if (!dbQuestionData) {
                 res.status(404).json({ message: 'No question found with this id' });
                 return;
@@ -84,7 +96,7 @@ router.get('/question/:id', (req, res) => {
 
             // serialize the data
             const question = dbQuestionData.get({ plain: true });
-
+            
             // pass data to template
             res.render('single-question', {
                 question,

@@ -101,6 +101,30 @@ router.put('/vote', withAuth, (req, res) => {
   }
 });
 
+// router.put('/:id', withAuth, (req, res) => {
+//   Question.update(
+//       {
+//           title: req.body.title
+//       },
+//       {
+//           where: {
+//               id: req.params.id
+//           }
+//       },
+//   )
+//       .then(dbQuestionData => {
+//           if (!dbQuestionData) {
+//               res.status(404).json({ message: 'No post found with this id ' });
+//               return;
+//           }
+//           res.json(dbQuestionData);
+//       })
+//       .catch(err => {
+//           console.log(err);
+//           res.status(500).json(err);
+//       });
+// });
+
 
 router.delete('/:id', withAuth, (req, res) => {
   Question.destroy({

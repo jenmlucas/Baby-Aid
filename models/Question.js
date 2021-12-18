@@ -6,7 +6,8 @@ class Question extends Model {
     static vote(body, models) {
         return models.Vote.create({
             parent_id: body.parent_id,
-            question_id: body.question_id
+            question_id: body.question_id,
+            answer_id: null
         }).then(() => {
             return Question.findOne({
                 where: {
