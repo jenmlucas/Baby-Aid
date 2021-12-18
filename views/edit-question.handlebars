@@ -6,6 +6,7 @@
     <form class="edit-question-form">
         <div>
             <input name="question-title" type="text" value="{{question.title}}" />
+            <input name="question-content" type="text" value="{{question.content}}" />
         </div>
         <div>
             {{question.vote_count}} {{format_plural "point" question.vote_count}} by you on {{moment question.created_at format="ddd DD/MM/YYYY HH:mm A"}}

@@ -3,10 +3,8 @@ const { Question, Parent, Vote, Answer } = require('../../models');
 const sequelize = require('../../config/connection');
 const withAuth = require('../../utils/auth');
 
-// get all users
 router.get('/', (req, res) => {
   Question.findAll({
-    // Query configuration
     attributes: [
       'id',
       'content',
@@ -30,7 +28,7 @@ router.get('/', (req, res) => {
       }
     ]
   })
-    .then(dbPostData => res.json(dbPostData))
+    .then(dbQuestionData => res.json(dbQuestionData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
@@ -64,12 +62,12 @@ router.get('/:id', (req, res) => {
       }
     ]
   })
-    .then(dbPostData => {
-      if (!dbPostData) {
-        res.status(404).json({ message: 'No post found with this id' });
+    .then(dbQuestionData => {
+      if (!dbQuestionData) {
+        res.status(404).json({ message: 'No question found with this id' });
         return;
       }
-      res.json(dbPostData);
+      res.json(dbQuestionData);
     })
     .catch(err => {
       console.log(err);
@@ -100,6 +98,30 @@ router.put('/vote', withAuth, (req, res) => {
     });
   }
 });
+
+router.put('/:id', withAuth, (req, res) => {
+  Question.update(
+    {
+      title: req.body.title,
+      content: req.body.content
+    },
+    {
+      where:{
+        id: req.params.id
+      }
+    })
+    .then(dbQuestionData => {
+      if(!dbQuestionData) {
+        res.status(404).json({ message: 'No question found with this id' })
+        return
+      }
+      res.json(dbQuestionData)
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    })
+})
 
 
 router.delete('/:id', withAuth, (req, res) => {
