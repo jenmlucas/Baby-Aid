@@ -15,25 +15,25 @@ Question.belongsTo(Parent, {
 Parent.belongsToMany(Question, {
     through: Vote,
     as: 'voted_questions',
-    foreignKey: 'parent_id'
+    // foreignKey: 'parent_id'
 });
 
 Question.belongsToMany(Parent, {
     through: Vote,
     as: 'voted_questions',
-    foreignKey: 'question_id'
+    // foreignKey: 'question_id'
 });
 
 Vote.belongsTo(Parent, {
-    foreignKey: 'parent_id'
+    // foreignKey: 'parent_id'
 });
 
 Vote.belongsTo(Question, {
-    foreignKey: 'question_id'
+    // foreignKey: 'question_id'
 });
 
 Parent.hasMany(Vote, {
-    foreignKey: 'parent_id'
+    // foreignKey: 'parent_id'
 });
 
 // Question.hasMany(Vote, {

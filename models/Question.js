@@ -33,6 +33,7 @@ Question.init(
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
+            unique: false,
             primaryKey: true,
             autoIncrement: true
         },

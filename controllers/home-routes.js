@@ -48,6 +48,7 @@ router.get('/login', (req, res) => {
     res.render('login')
 })
 
+// We need to pass in an answer_id and then figure out how to get it in front end logic
 
 router.get('/question/:id', (req, res) => {
     Question.findOne({
@@ -86,17 +87,37 @@ router.get('/question/:id', (req, res) => {
         ]
     })
         .then(dbQuestionData => {
-            ///.map somewhere in here! 
-            console.log(dbQuestionData)
-            console.log(dbQuestionData.dataValues.answers)
             if (!dbQuestionData) {
                 res.status(404).json({ message: 'No question found with this id' });
                 return;
             }
 
-            // serialize the data
-            const question = dbQuestionData.get({ plain: true });
+            // const question = dbQuestionData.get({ plain: true });
+
+            const answers = [{}];
+
+            const answerArr = dbQuestionData.dataValues.answers
             
+            answerArr.forEach((answer, index)=> {
+                answers[index] = {
+                    id: answer.dataValues.id,
+                    answer_text: answer.dataValues.answer_text,
+                    question_id: answer.dataValues.question_id,
+                    parent_id: answer.dataValues.parent_id,
+                    created_at: answer.dataValues.created_at,
+                    vote_count: answer.Votes.length
+                }
+            })
+
+            const question = {
+                id: dbQuestionData.dataValues.id,
+                content: dbQuestionData.dataValues.content,
+                title: dbQuestionData.dataValues.title,
+                vote_count: dbQuestionData.dataValues.vote_count,
+                created_at: dbQuestionData.dataValues.created_at,
+                answers: answers
+            }
+
             // pass data to template
             res.render('single-question', {
                 question,
