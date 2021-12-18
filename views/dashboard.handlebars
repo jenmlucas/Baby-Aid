@@ -17,14 +17,14 @@
 {{#if questions.length}}
 <section>
     <h2>Your Questions</h2>
-    <ol>
+    <div>
         {{#each questions as |question|}}
-        <li>
+        <div>
             {{> question-info question}}
             <a href="/dashboard/edit/{{question.id}}">Edit Question</a>
-        </li>
+        </div>
         {{/each}}
-    </ol>
+    </div>
 </section>
 {{/if}}
 
