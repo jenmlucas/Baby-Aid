@@ -1,7 +1,6 @@
 <div class="answers">
     {{#each this}}
     <section class="answer">
-        <h1 class="answer-id" style="height:0;width:0;overflow:hidden;">{{id}}</h1>
         <div class="text mt-4">
             {{answer_text}}
         </div>
@@ -9,7 +8,7 @@
             {{parent.username}} on {{moment created_at format="ddd DD/MM/YYYY HH:mm A"}}
         </div>
         {{vote_count}} {{format_plural "point" vote_count}}
-        <button type="button" class="second-vote-btn">vote</button>
+        <button type="button" class="second-vote-btn" data-answerId={{id}}>vote</button>
     </section>
     {{/each}}
 </div>

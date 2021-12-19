@@ -92,14 +92,12 @@ router.get('/question/:id', (req, res) => {
                 return;
             }
 
-            // const question = dbQuestionData.get({ plain: true });
-
-            const answers = [{}];
 
             const answerArr = dbQuestionData.dataValues.answers
-            
-            answerArr.forEach((answer, index)=> {
-                answers[index] = {
+
+            // implied return with () instead of bracket
+            const answers = answerArr.map(answer => (
+                {
                     id: answer.dataValues.id,
                     answer_text: answer.dataValues.answer_text,
                     question_id: answer.dataValues.question_id,
@@ -107,7 +105,7 @@ router.get('/question/:id', (req, res) => {
                     created_at: answer.dataValues.created_at,
                     vote_count: answer.Votes.length
                 }
-            })
+            ))
 
             const question = {
                 id: dbQuestionData.dataValues.id,
@@ -118,7 +116,8 @@ router.get('/question/:id', (req, res) => {
                 answers: answers
             }
 
-            console.log(question.answers)
+            console.log(question)
+
             // pass data to template
             res.render('single-question', {
                 question,

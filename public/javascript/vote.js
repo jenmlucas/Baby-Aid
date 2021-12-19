@@ -29,14 +29,12 @@ document.querySelector(".vote-btn").addEventListener("click", voteClickHandler);
 async function secondVoteClickHandler(event) {
   event.preventDefault();
 
-  const id = window.location.toString().split("/")[
-    window.location.toString().split("/").length - 1
-  ];
+  const id = event.target.getAttribute("data-answerId")
 
   const response = await fetch("/api/answers/vote", {
     method: "PUT",
     body: JSON.stringify({
-      answer_id: id,
+      answer_id: id
     }),
     headers: {
       "Content-Type": "application/json",
@@ -49,4 +47,8 @@ async function secondVoteClickHandler(event) {
     alert(response.statusText);
   }
 }
-document.querySelector(".second-vote-btn").addEventListener("click", secondVoteClickHandler);
+
+const answerVoteButtons = document.querySelectorAll(".second-vote-btn")
+answerVoteButtons.forEach(button => {
+  button.addEventListener("click", secondVoteClickHandler);
+})
