@@ -1,6 +1,6 @@
 <section class="d-flex flex-column align-items-center">
     <h2 class="text-center">Create A New Question</h2>
-    <form id="new-question-form" style="width: 30rem;" >
+    <form id="new-question-form" style="width: 30rem;">
         <div class="mb-3">
             <label for="question-title" class="form-label">Title</label>
             <input type="text" class="form-control" id="question-title" name="question-title">
@@ -11,7 +11,6 @@
         </div>
         <button type="submit" class="btn btn-outline-primary">Create</button>
     </form>
-
 </section>
 
 {{#if questions.length}}
@@ -20,8 +19,24 @@
     <div>
         {{#each questions as |question|}}
         <div>
-            {{> question-info question}}
-            <a href="/dashboard/edit/{{question.id}}">Edit Question</a>
+            <article class="d-flex justify-content-center">
+                <div class="card text-dark bg-light mb-3" style="width: 30rem;">
+                    <div class="card-body">
+                        <h3 class="card-title">{{title}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Created by {{parent.username}} on {{moment
+                                created_at
+                                format="ddd
+                                DD/MM/YYYY HH:mm A"}}</h6>
+                            <p class="card-text">{{content}}</p>
+                            <p class="card-text">
+                                {{answers.length}} {{format_plural "answer" answers.length}}
+                                with {{vote_count}} {{format_plural "point" vote_count}}
+                            </p>
+                            <a href="/question/{{id}}" class="btn btn-primary">See post</a>
+                            <a href="/dashboard/edit/{{question.id}}" class="btn btn-primary">Edit Question</a>
+                    </div>
+                </div>
+            </article>
         </div>
         {{/each}}
     </div>

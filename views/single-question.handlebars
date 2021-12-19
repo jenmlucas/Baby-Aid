@@ -2,16 +2,16 @@
     {{> question-info question}}
 </article>
 {{#if loggedIn}}
-<form class="answer-form">
-    <div>
-        <textarea name="answer-body"></textarea>
-    </div>
-
-    <div>
-        <button type="submit">add answer</button>
-        <button type="button" class="vote-btn">vote</button>
-    </div>
-</form>
+<div class="d-flex flex-column align-items-center mt-3">
+    <h2 class="text-center">Post An Answer</h2>
+    <form class="answer-form" style="width: 30rem;" >
+        <div class="mb-3">
+            <textarea class="form-control" id="answer-body" name="answer-body"></textarea>
+        </div>
+        <button type="submit" class="btn btn-outline-primary">add answer</button>
+        <button type="button" class="vote-btn btn btn-outline-success">vote</button>
+    </form>
+</div>
 {{/if}}
 
 {{> answer question.answers}}

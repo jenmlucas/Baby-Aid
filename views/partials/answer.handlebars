@@ -1,12 +1,10 @@
-<div class="answers">
+<div class="d-flex flex-column align-items-center mt-3">
     {{#each this}}
-    <section class="answer">
-        <div class="meta">
-            {{answer.username}} on {{moment created_at format="ddd DD/MM/YYYY HH:mm A"}}
+    <div class="card mt-2" style="width: 18rem;">
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">{{parent.username}} answers on {{moment created_at format="ddd DD/MM/YYYY HH:mm A"}}</h6>
+            <p class="card-text"> {{answer_text}}</p>
         </div>
-        <div class="text">
-            {{answer_text}}
-        </div>
-    </section>
+    </div>
     {{/each}}
 </div>
