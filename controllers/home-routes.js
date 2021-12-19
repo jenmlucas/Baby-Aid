@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Question, Parent, Answer } = require('../models');
+const { Question, Parent, Answer, Vote } = require('../models');
 
 router.get('/', (req, res) => {
     Question.findAll({
@@ -49,6 +49,7 @@ router.get('/login', (req, res) => {
 })
 
 
+
 router.get('/question/:id', (req, res) => {
     Question.findOne({
         where: {
@@ -64,16 +65,25 @@ router.get('/question/:id', (req, res) => {
         include: [
             {
                 model: Answer,
-                attributes: ['id', 'answer_text', 'question_id', 'parent_id', 'created_at'],
-                include: {
+                attributes: ['id', 'answer_text', 'question_id', 'parent_id', 'created_at',
+                [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE answer_id = vote.answer_id)'), 'vote_count']
+            ],
+                include: [
+                    {
                     model: Parent,
                     attributes: ['username']
-                }
+                    },
+                    {
+                    model: Vote,
+                    attribute: ['id']
+                    }
+                ]
             },
             {
                 model: Parent,
                 attributes: ['username']
             }
+            
         ]
     })
         .then(dbQuestionData => {
@@ -82,8 +92,31 @@ router.get('/question/:id', (req, res) => {
                 return;
             }
 
-            // serialize the data
-            const question = dbQuestionData.get({ plain: true });
+
+            const answerArr = dbQuestionData.dataValues.answers
+
+            // implied return with () instead of bracket
+            const answers = answerArr.map(answer => (
+                {
+                    id: answer.dataValues.id,
+                    answer_text: answer.dataValues.answer_text,
+                    question_id: answer.dataValues.question_id,
+                    parent_id: answer.dataValues.parent_id,
+                    created_at: answer.dataValues.created_at,
+                    vote_count: answer.Votes.length
+                }
+            ))
+
+            const question = {
+                id: dbQuestionData.dataValues.id,
+                content: dbQuestionData.dataValues.content,
+                title: dbQuestionData.dataValues.title,
+                vote_count: dbQuestionData.dataValues.vote_count,
+                created_at: dbQuestionData.dataValues.created_at,
+                answers: answers
+            }
+
+            console.log(question)
 
             // pass data to template
             res.render('single-question', {

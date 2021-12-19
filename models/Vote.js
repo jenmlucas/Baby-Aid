@@ -20,9 +20,19 @@ Vote.init(
         },
         question_id: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
+            unique: false,
             references: {
                 model: 'question',
+                key: 'id'
+            }
+        },
+        answer_id: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            unique: false,
+            references: {
+                model: 'answer',
                 key: 'id'
             }
         }  
