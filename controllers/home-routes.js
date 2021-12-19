@@ -48,7 +48,7 @@ router.get('/login', (req, res) => {
     res.render('login')
 })
 
-// We need to pass in an answer_id and then figure out how to get it in front end logic
+
 
 router.get('/question/:id', (req, res) => {
     Question.findOne({
@@ -118,6 +118,7 @@ router.get('/question/:id', (req, res) => {
                 answers: answers
             }
 
+            console.log(question.answers)
             // pass data to template
             res.render('single-question', {
                 question,
