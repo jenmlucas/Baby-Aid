@@ -1,31 +1,32 @@
-<article>
-    <a href="/dashboard"> &larr; Back to dashboard</a>
+<article class="d-flex flex-column align-items-center mt-4">
     <h2>
         Edit Question
     </h2>
-    <form class="edit-question-form">
-        <div>
-            <input name="question-title" type="text" value="{{question.title}}" />
+    <form class="edit-question-form" style="width: 30rem;">
+        <div class="mb-3">
+            <label for="question-title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="question-title" type="text" name="question-title" value="{{question.title}}"></input>
         </div>
-        <div>
-            {{question.vote_count}} {{format_plural "point" question.vote_count}} by you on {{moment question.created_at format="ddd DD/MM/YYYY HH:mm A"}}
-            |
-            <a href="/post/{{question.id}}">{{question.comments.length}} {{format_plural "comment" question.comments.length}}</a>
+        <div class="mb-3">
+            <label for="question-content" class="form-label">Content</label>
+            <input class="form-control" id="question-content" name="question-content" type="text" rows="3"  value="{{question.content}}"></input>
         </div>
-        <button type="submit">Save Question</button>
-        <button type="button" class="delete-question-btn">Delete Question</button>
+        <button type="submit" class="btn btn-outline-primary">Save Changes</button>
+        <button type="button" class="delete-question-btn btn btn-outline-danger">Delete Question</button>
     </form>
 </article>
 
-<form class="answer-form">
-    <div>
-        <textarea name="answer-body"></textarea>
-    </div>
 
-    <div>
-        <button type="submit">add answer</button>
-    </div>
-</form>
+<div class="d-flex flex-column align-items-center mt-5">
+    <h4 class="text-center">Post An Answer</h4>
+    <form class="answer-form" style="width: 30rem;" >
+        <div class="mb-3">
+            <textarea class="form-control" id="answer-body" name="answer-body"></textarea>
+        </div>
+        <button type="submit" class="btn btn-outline-primary">add answer</button>
+        <button type="button" class="vote-btn btn btn-outline-success">vote</button>
+    </form>
+</div>
 
 {{> answer question.answers}}
 

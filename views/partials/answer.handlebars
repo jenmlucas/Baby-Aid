@@ -1,14 +1,12 @@
-<div class="answers">
+<div class="d-flex flex-column align-items-center mt-3">
     {{#each this}}
-    <section class="answer">
-        <div class="text mt-4">
-            {{answer_text}}
+    <div class="answer card mt-2" style="width: 18rem;">
+        <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">{{parent.username}} answered on {{moment created_at format="ddd DD/MM/YYYY HH:mm A"}}</h6>
+            <p class="card-text"> {{answer_text}}</p>
+            {{vote_count}} {{format_plural "point" vote_count}}
         </div>
-        <div >
-            {{parent.username}} on {{moment created_at format="ddd DD/MM/YYYY HH:mm A"}}
-        </div>
-        {{vote_count}} {{format_plural "point" vote_count}}
         <button type="button" class="second-vote-btn" data-answerId={{id}}>vote</button>
-    </section>
+    </div>
     {{/each}}
 </div>
