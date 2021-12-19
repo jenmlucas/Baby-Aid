@@ -1,0 +1,14 @@
+.whole {
+    border: rgb(50, 65, 206) solid 15px;
+    background-color:rgb(243, 243, 232);
+    background-image: url("../images/952696.jpg") ;
+    background-size: cover;
+}
+#login-form  signup-form {
+    align-content:center
+}
+.footer {
+    border: rgb(50, 65, 206) solid 15px;
+    
+  
+}
