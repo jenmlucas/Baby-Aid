@@ -1,3 +1,13 @@
+function openModal() {
+  let myModal = new bootstrap.Modal(document.getElementById('myModal'))
+  myModal.show();
+}
+
+function openAnswerModal() {
+  let myAnswerModal = new bootstrap.Modal(document.getElementById('myAnswerModal'))
+  myAnswerModal.show();
+}
+
 async function voteClickHandler(event) {
   event.preventDefault();
 
@@ -15,15 +25,17 @@ async function voteClickHandler(event) {
     },
   });
 
+
   if (response.ok) {
     document.location.reload();
+  } else if (response.status === 409) {
+    openModal()
   } else {
-    alert(response.statusText);
+    alert(response.statusText)
   }
 }
 
 document.querySelector(".vote-btn").addEventListener("click", voteClickHandler);
-
 
 
 async function secondVoteClickHandler(event) {
@@ -41,8 +53,11 @@ async function secondVoteClickHandler(event) {
     },
   });
 
+
   if (response.ok) {
     document.location.reload();
+  } else if (response.status === 409) {
+    openAnswerModal()
   } else {
     alert(response.statusText);
   }

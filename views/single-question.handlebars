@@ -7,7 +7,7 @@
 {{#if loggedIn}}
 <div class="d-flex flex-column align-items-center mt-3">
     <h2 class="text-center">Post An Answer</h2>
-    <form class="answer-form" style="width: 30rem;" >
+    <form class="answer-form" style="width: 30rem;">
         <div class="mb-3">
             <textarea class="form-control" id="answer-body" name="answer-body"></textarea>
         </div>
@@ -16,8 +16,25 @@
     </form>
 </div>
 {{/if}}
+{{!-- Modal  --}}
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Vote Duplicate</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">Great answer right! Only one per account though</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {{> answer question.answers}}
+
+
 
 {{#if loggedIn}}
 <script src="/javascript/answer.js"></script>
