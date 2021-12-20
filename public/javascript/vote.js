@@ -15,10 +15,13 @@ async function voteClickHandler(event) {
     },
   });
 
+
   if (response.ok) {
     document.location.reload();
+  } else if (response.status === 409) {
+    alert('You have already Voted')
   } else {
-    alert(response.statusText);
+    alert(response.statusText)
   }
 }
 
@@ -41,10 +44,14 @@ async function secondVoteClickHandler(event) {
     },
   });
 
+ 
   if (response.ok) {
     document.location.reload();
+  } else if (response.status === 409) {
+    alert('You have already Voted')
   } else {
     alert(response.statusText);
+    console.log(response)
   }
 }
 

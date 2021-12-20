@@ -88,14 +88,29 @@ router.post('/', withAuth, (req, res) => {
     });
 });
 
+
 router.put('/vote', withAuth, (req, res) => {
   if (req.session) {
-  Question.vote({ ...req.body, parent_id: req.session.parent_id }, { Vote, Answer, Parent })
-    .then(updatedVoteData => res.json(updatedVoteData))
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
+    Vote.findOne({
+      where: {
+        parent_id: req.session.parent_id,
+        question_id: req.body.question_id
+      }
+    }).then(voteData => {
+      if (!voteData) {
+        Question.vote({ ...req.body, parent_id: req.session.parent_id }, { Vote, Answer, Parent })
+          .then(updatedVoteData => {
+            res.json(updatedVoteData)
+          })
+      } else {
+        res.status(409).json({ message: "You have already voted" })
+        return;
+      }
+    })
+      .catch(err => {
+        console.log(err)
+        res.status(500).json(err)
+      })
   }
 });
 
@@ -106,12 +121,12 @@ router.put('/:id', withAuth, (req, res) => {
       content: req.body.content
     },
     {
-      where:{
+      where: {
         id: req.params.id
       }
     })
     .then(dbQuestionData => {
-      if(!dbQuestionData) {
+      if (!dbQuestionData) {
         res.status(404).json({ message: 'No question found with this id' })
         return
       }

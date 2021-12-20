@@ -69,24 +69,36 @@ router.get('/:id', (req, res) => {
         });
 });
 
+
 router.put('/vote', withAuth, (req, res) => {
     if (req.session) {
-    Answer.vote({ ...req.body, parent_id: req.session.parent_id }, { Vote, Question, Parent })
-      .then(updatedAnswerVoteData => res.json(updatedAnswerVoteData))
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
+        Vote.findOne({
+            where: {
+                parent_id: req.session.parent_id,
+                answer_id: req.body.answer_id
+            }
+        }).then(voteData => {
+            if (!voteData) {
+                Answer.vote({ ...req.body, parent_id: req.session.parent_id }, { Vote, Question, Parent })
+                    .then(updatedAnswerVoteData => res.json(updatedAnswerVoteData))
+            } else {
+                res.status(409).json({ message: "You have already voted" })
+                return;
+            }
+        }).catch(err => {
+            console.log(err)
+            res.status(500).json(err)
+        })
     }
-  });
+});
 
 
 router.post('/', withAuth, (req, res) => {
-        Answer.create({
-            answer_text: req.body.answer_text,
-            parent_id: req.session.parent_id,
-            question_id: req.body.question_id
-        })
+    Answer.create({
+        answer_text: req.body.answer_text,
+        parent_id: req.session.parent_id,
+        question_id: req.body.question_id
+    })
         .then(dbCommentData => res.json(dbCommentData))
         .catch(err => {
             console.log(err);
