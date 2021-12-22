@@ -1,12 +1,12 @@
 <article class="d-flex justify-content-center">
     <div class="card text-dark bg-light mb-3" style="width: 30rem;">
         <div class="card-body">
-            <h3 class="card-title">{{title}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Created by {{parent.username}} on {{moment created_at
+            <h3 class="card-title text-center">{{title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted text-center">Created by {{username}} on {{moment created_at
                     format="ddd
-                    DD/MM/YYYY HH:mm A"}}</h6>
-                <p class="card-text">{{content}}</p>
-                <p class="card-text">
+                    MM/DD/YYYY hh:mm a"}}</h6>
+                <p class="card-text text-center">{{content}}</p>
+                <p class="card-text text-center">
                     {{answers.length}} {{format_plural "answer" answers.length}}
                     with {{vote_count}} {{format_plural "point" vote_count}}
                 </p>

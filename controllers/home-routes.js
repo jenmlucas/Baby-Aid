@@ -93,8 +93,9 @@ router.get('/question/:id', withAuth, (req, res) => {
                 return;
             }
 
-
+            
             const answerArr = dbQuestionData.dataValues.answers
+        
 
             // implied return with () instead of bracket
             const answers = answerArr.map(answer => (
@@ -104,21 +105,23 @@ router.get('/question/:id', withAuth, (req, res) => {
                     question_id: answer.dataValues.question_id,
                     parent_id: answer.dataValues.parent_id,
                     created_at: answer.dataValues.created_at,
-                    vote_count: answer.Votes.length
+                    vote_count: answer.Votes.length,
+                    parent_username:answer.dataValues.parent.dataValues.username
                 }
             ))
 
             const question = {
                 id: dbQuestionData.dataValues.id,
+                username: dbQuestionData.dataValues.parent.dataValues.username,
                 content: dbQuestionData.dataValues.content,
                 title: dbQuestionData.dataValues.title,
                 vote_count: dbQuestionData.dataValues.vote_count,
                 created_at: dbQuestionData.dataValues.created_at,
                 answers: answers
             }
-
             console.log(question)
-
+            
+            
             // pass data to template
             res.render('single-question', {
                 question,
