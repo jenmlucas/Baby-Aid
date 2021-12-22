@@ -19,8 +19,9 @@ main {
 
 .hero {
     text-align: center;
-    font-weight: bold;
-    
+    font-weight: 900;
+    color: orangered;
+    font-size: 100px; 
 }
  
 #bottom-footer {
