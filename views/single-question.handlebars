@@ -1,5 +1,8 @@
 <article class="question">
     {{> question-info question}}
+<div class="d-flex justify-content-center">
+    <button type="button" class="question-vote-btn btn btn-outline-success">vote</button>
+</div>
 </article>
 
 
@@ -11,8 +14,9 @@
         <div class="mb-3">
             <textarea class="form-control" id="answer-body" name="answer-body"></textarea>
         </div>
+        <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-outline-primary">add answer</button>
-        <button type="button" class="vote-btn btn btn-outline-success">vote</button>
+        </div>
     </form>
 </div>
 {{/if}}
@@ -24,7 +28,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">Vote Duplicate</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">Great answer right! Only one per account though</div>
+            <div class="modal-body"> That is great you like this Question so much you would like to vote again. Unfortunately, we only allow one vote per account </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
@@ -32,7 +36,11 @@
     </div>
 </div>
 
+<div class="d-flex justify-content-center mt-4">
+    <div style="height:400px;width:600px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
 {{> answer question.answers}}
+    </div>
+</div>
 
 
 
