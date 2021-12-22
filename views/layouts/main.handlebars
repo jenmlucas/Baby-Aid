@@ -11,22 +11,27 @@
     <title>Baby Aid</title>
 </head>
 
-<body class="whole">
-    <nav class="navbar">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col">
-                    <a href="/">Home</a>
+<body class="whole"> 
+    <nav >
+        <div class="container"> 
+            <div >               
+                    <a class="btn btn-primary btn-sm disabled" role="button" href="/">Home</a>
                     {{#if loggedIn}}
-                    <a href="/dashboard">Dashboard</a>
-                    <button id="logout">logout</button>
+                    <a class="btn btn-primary btn-sm disabled"href="/dashboard">Dashboard</a>
+                    <button class="btn btn-primary btn-sm disabled" id="logout">logout</button>
                     {{else}}
-                    <a href="/login">login</a>
+                    <a class="btn btn-primary btn-sm disabled" href="/login">login</a>
                     {{/if}}
                 </div>
             </div>
         </div>
     </nav>
+    <section class="hero"  >
+        <div class="hero-cta">
+            <h1> Baby-Aid</h1>
+        </div>
+    </section>      
+    </div>
     <main>
         <div class="container">
             <div class="row d-flex justify-content-center">
@@ -37,14 +42,13 @@
         </div>
     </main>
     <footer class="navbar">
-        <div class="container footer">
-            <div class="row">
-                <div class="col">
+        <div class="container">
+            
+                <div class="class="align-bottom">
                     Copyright &copy; 2021-
                     <script>document.write(new Date().getFullYear())</script>
                     Jennifer Lucas, Brad Litman, Sandy Sanders. All Rights Reserved</p>
                 </div>
-            </div>
         </div>
     </footer>
 
