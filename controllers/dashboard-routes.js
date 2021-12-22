@@ -63,6 +63,7 @@ router.get('/:id', (req, res) => {
 });
 
 
+// does get username
 router.get('/edit/:id', withAuth, (req, res) => {
     Question.findOne({
         where: {
