@@ -92,7 +92,6 @@ router.get('/question/:id', withAuth, (req, res) => {
                 res.status(404).json({ message: 'No question found with this id' });
                 return;
             }
-
             
             const answerArr = dbQuestionData.dataValues.answers
         
@@ -121,10 +120,12 @@ router.get('/question/:id', withAuth, (req, res) => {
             }
             console.log(question)
             
+            const removeSeePostLink = true
             
             // pass data to template
             res.render('single-question', {
                 question,
+                removeSeePostLink,
                 loggedIn: req.session.loggedIn
             });
         })
