@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Question, Parent, Answer, Vote } = require('../models');
+const withAuth = require('../utils/auth')
 
 router.get('/', (req, res) => {
     Question.findAll({
@@ -49,8 +50,8 @@ router.get('/login', (req, res) => {
 })
 
 
-// does not get parent.username
-router.get('/question/:id', (req, res) => {
+
+router.get('/question/:id', withAuth, (req, res) => {
     Question.findOne({
         where: {
             id: req.params.id
