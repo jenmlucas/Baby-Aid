@@ -1,9 +1,29 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+  
+main {
+    flex: 1;
+}
+
 .whole {
-    border: rgb(50, 65, 206) solid 15px;
     background-color:rgb(243, 243, 232);
     background-image: url("../images/952696.jpg") ;
     background-size: cover;
 }
 #login-form  signup-form {
     align-content:center
+}
+
+.hero {
+    text-align: center;
+    font-weight: bold;
+    
+}
+ 
+#bottom-footer {
+        text-align: center;
+        margin-top: 40px;
 }

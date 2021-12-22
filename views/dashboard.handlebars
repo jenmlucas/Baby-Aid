@@ -15,8 +15,9 @@
 
 {{#if questions.length}}
 <section>
-    <h2 class="text-center">Your Questions</h2>
-    <div>
+    <h2 class="text-center mt-4">Your Questions</h2>
+    <div class="d-flex justify-content-center">
+    <div class="text-center" style="height:460px;width:600px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
         {{#each questions as |question|}}
         <div>
             <article class="d-flex justify-content-center">
@@ -39,6 +40,7 @@
             </article>
         </div>
         {{/each}}
+    </div>
     </div>
 </section>
 {{/if}}
