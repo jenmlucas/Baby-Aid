@@ -40,28 +40,6 @@ router.get('/', withAuth, (req, res) => {
     })
 });
 
-router.get('/', (req, res) => {
-    Answer.findAll(
-        [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE answer.id = vote.answer_id)'), 'vote_count']
-    )
-        .then(dbCommentData => res.json(dbCommentData))
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-});
-
-router.get('/:id', (req, res) => {
-    Answer.findOne(
-        [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE answer.id = vote.answer_id)'), 'vote_count']
-    )
-        .then(dbCommentData => res.json(dbCommentData))
-        .catch(err => {
-            console.log(err);
-            res.status(500).json(err);
-        });
-});
-
 
 router.get('/edit/:id', withAuth, (req, res) => {
     Question.findOne({
@@ -109,6 +87,5 @@ router.get('/edit/:id', withAuth, (req, res) => {
             res.status(500).json(err);
         })
 })
-
 
 module.exports = router;

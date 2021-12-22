@@ -14,7 +14,7 @@
 <body class="whole"> 
     <nav >
         <div class="container"> 
-            <div >               
+            <div class="mt-2">               
                     <a class="btn btn-primary btn-sm" role="button" href="/">Home</a>
                     {{#if loggedIn}}
                     <a class="btn btn-primary btn-sm"href="/dashboard">Dashboard</a>
@@ -41,10 +41,16 @@
             </div>
         </div>
     </main>
-   <footer id="bottom-footer">
-             Copyright &copy; 2021-
-             <script>document.write(new Date().getFullYear())</script>
-             Brad Litman, Jennifer Lucas, Sandy Sanders. All Rights Reserved</p>
+
+    <footer class="navbar">
+        <div class="container">
+            
+                <div class="align-bottom">
+                    Copyright &copy; 2021-
+                    <script>document.write(new Date().getFullYear())</script>
+                    Brad Litman, Jennifer Lucas, Sandy Sanders. All Rights Reserved</p>
+                </div>
+        </div>
     </footer>
 
     {{#if loggedIn}}
