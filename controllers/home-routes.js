@@ -92,7 +92,7 @@ router.get('/question/:id', (req, res) => {
                 return;
             }
 
-
+            
             const answerArr = dbQuestionData.dataValues.answers
         
 
