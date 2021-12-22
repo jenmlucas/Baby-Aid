@@ -8,7 +8,7 @@ function openAnswerModal() {
   myAnswerModal.show();
 }
 
-async function voteClickHandler(event) {
+async function questionVoteClickHandler(event) {
   event.preventDefault();
 
   const id = window.location.toString().split("/")[
@@ -35,10 +35,10 @@ async function voteClickHandler(event) {
   }
 }
 
-document.querySelector(".vote-btn").addEventListener("click", voteClickHandler);
+document.querySelector(".question-vote-btn").addEventListener("click", questionVoteClickHandler);
 
 
-async function secondVoteClickHandler(event) {
+async function answerVoteClickHandler(event) {
   event.preventDefault();
 
   const id = event.target.getAttribute("data-answerId")
@@ -63,7 +63,7 @@ async function secondVoteClickHandler(event) {
   }
 }
 
-const answerVoteButtons = document.querySelectorAll(".second-vote-btn")
+const answerVoteButtons = document.querySelectorAll(".answer-vote-btn")
 answerVoteButtons.forEach(button => {
-  button.addEventListener("click", secondVoteClickHandler);
+  button.addEventListener("click", answerVoteClickHandler);
 })
