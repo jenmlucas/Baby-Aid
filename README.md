@@ -12,7 +12,7 @@ Baby Aid was created to allow parents with kids of all ages from newborn to 18 t
 * [Questions](#questions)
 
 ## Installation
-Clone the repo, then do "npm install". Create a new .env file. Then open your Mysql and run "source db/schema.sql" once successful, run "quit". Follow this link (add heroku link )and your site will be up and running waiting for new posts. 
+Clone the repo, then do "npm install". Create a new .env file. Then open your Mysql and run "source db/schema.sql" once successful, run "quit". Follow this link (add heroku link ) and your site will be up and running waiting for new posts. 
 
 ## Usage
 This is what it will look like on your device. 
@@ -25,7 +25,7 @@ This is what it will look like on your device.
 N/A
 
 ## Contributing
-Brad Litman[Github](https://github.com/Blitman12), email bradlitman94@gmail.com,
+Brad Litman [Github](https://github.com/Blitman12), email bradlitman94@gmail.com,
 
 Jennifer Lucas [Github](https://github.com/jenmlucas), email jenmlucas1@gmail.com,
 
@@ -35,4 +35,4 @@ Sandy Sanders [Github](https://github.com/sandy-06), email Sandy-sanders@msn.com
 N/A
 
 ## Questions
-Please checkout our Githubs above for other projects we have worked on. If you have any questions or concerns, feel free to email one of us above. Thank you. 
+Please checkout our Github's above for other projects we have worked on. If you have any questions or concerns, feel free to email one of us above. Thank you. 
