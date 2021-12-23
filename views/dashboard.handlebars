@@ -1,0 +1,48 @@
+<section class="d-flex flex-column align-items-center">
+    <h2 class="text-center">Create A New Question</h2>
+    <form id="new-question-form" style="width: 30rem;">
+        <div class="mb-3">
+            <label for="question-title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="question-title" name="question-title">
+        </div>
+        <div class="mb-3">
+            <label for="question-content" class="form-label">Question</label>
+            <textarea class="form-control" id="question-content" name="question-content" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</section>
+
+{{#if questions.length}}
+<section>
+    <h2 class="text-center mt-4">Your Questions</h2>
+    <div class="d-flex justify-content-center">
+    <div class="text-center" style="height:460px;width:600px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+        {{#each questions as |question|}}
+        <div>
+            <article class="d-flex justify-content-center">
+                <div class="card text-dark bg-light mb-3" style="width: 30rem;">
+                    <div class="card-body">
+                        <h3 class="card-title">{{title}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Created by {{parent.username}} on {{moment
+                                created_at
+                                format="ddd
+                                MM/DD/YYYY hh:mm a"}}</h6>
+                            <p class="card-text">{{content}}</p>
+                            <p class="card-text">
+                                {{answers.length}} {{format_plural "answer" answers.length}}
+                                with {{vote_count}} {{format_plural "point" vote_count}}
+                            </p>
+                            <a href="/question/{{id}}" class="btn btn-primary">See post</a>
+                            <a href="/dashboard/edit/{{question.id}}" class="btn btn-primary">Edit Question</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+        {{/each}}
+    </div>
+    </div>
+</section>
+{{/if}}
+
+<script src="/javascript/add-question.js"></script>

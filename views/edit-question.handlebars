@@ -1,0 +1,20 @@
+<article class="d-flex flex-column align-items-center mt-4">
+    <h2>
+        Edit Question
+    </h2>
+    <form class="edit-question-form" style="width: 30rem;">
+        <div class="mb-3">
+            <label for="question-title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="question-title" type="text" name="question-title" value="{{question.title}}"></input>
+        </div>
+        <div class="mb-3">
+            <label for="question-content" class="form-label">Content</label>
+            <input class="form-control" id="question-content" name="question-content" type="text" rows="3"  value="{{question.content}}"></input>
+        </div>
+        <button type="submit" class="btn btn-outline-primary">Save Changes</button>
+        <button type="button" class="delete-question-btn btn btn-outline-danger">Delete Question</button>
+    </form>
+</article>
+
+<script src="/javascript/edit-question.js"></script>
+<script src="/javascript/delete-question.js"></script>

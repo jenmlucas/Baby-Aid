@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="col d-flex flex-wrap justify-content-center">
+        {{#each questions as |question|}}
+        <div class="border-primary m-3 col-3" style="width: 25rem;">
+            <article class="d-flex justify-content-center">
+                <div class="card text-dark bg-light mb-3" style="width: 43rem; height:18rem;">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">{{title}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted text-center">Created by {{parent.username}} on
+                                {{moment created_at
+                                format="ddd
+                                MM/DD/YYYY hh:mm a"}}</h6>
+                            <p class="card-text text-center">{{content}}</p>
+                            <p class="card-text text-center">
+                                {{answers.length}} {{format_plural "answer" answers.length}}
+                                with {{vote_count}} {{format_plural "point" vote_count}}
+                            </p>
+                            <div class="text-center">
+                                <a href="/question/{{id}}" class="btn btn-primary stretched-link">See post</a>
+                            </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+        {{/each}}
+    </div>
+</div>

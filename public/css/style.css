@@ -1,0 +1,34 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+  
+main {
+    flex: 1;
+}
+
+.whole {
+    background-color:rgb(243, 243, 232);
+    background-image: url("../images/952696.jpg") ;
+    background-size: cover;
+}
+#login-form  signup-form {
+    align-content:center
+}
+
+.hero {
+    text-align: center;
+    font-weight: 900;
+    color: #12bb61;
+    font-size: 100px; 
+    -moz-text-stroke-color: black;
+    -webkit-text-stroke-color: black;
+    -moz-text-stroke-width: 2px;  
+    -webkit-text-stroke-width: 2px;
+}
+ 
+#bottom-footer {
+        text-align: center;
+        margin-top: 40px;
+}
