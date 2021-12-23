@@ -44,10 +44,6 @@ Parent.init(
             async beforeCreate(newParentData) {
                 newParentData.password = await bcrypt.hash(newParentData.password, 10);
                 return newParentData;
-            },
-            async beforeUpdate(updatedParentData) {
-                updatedParentData.password = await bcrypt.hash(updatedParentData.password, 10);
-                return updatedParentData;
             }
         },
         sequelize,

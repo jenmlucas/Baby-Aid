@@ -1,18 +1,18 @@
 const router = require('express').Router();
 const { Parent, Question, Vote, Answer } = require("../../models");
-const withAuth = require('../../utils/auth')
 
-// Get all Parents
-router.get('/', (req, res) => {
-    Parent.findAll({
-        attributes: { exclude: ['password']}
-    })
-    .then(dbParentData => res.json(dbParentData))
-    .catch(err => {
-        console.log(err)
-        res.status(500).json(err)
-    })
-})
+
+// Get all Parents for future development - email list potentially
+// router.get('/', (req, res) => {
+//     Parent.findAll({
+//         attributes: { exclude: ['password']}
+//     })
+//     .then(dbParentData => res.json(dbParentData))
+//     .catch(err => {
+//         console.log(err)
+//         res.status(500).json(err)
+//     })
+// })
 
 // Get a single parents
 router.get('/:id', (req, res) => {
