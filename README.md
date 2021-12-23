@@ -12,12 +12,12 @@ Baby Aid was created to allow parents with kids of all ages from newborn to 18 t
 * [Questions](#questions)
 
 ## Installation
-Clone the repo, then do "npm install". Create a new .env file. Then open your Mysql and run "source db/schema.sql" once successful, run "quit". Follow this link (add heroku link ) and your site will be up and running waiting for new posts. 
+Clone the repo, then do "npm install". Create a new .env file. Then open your Mysql and run "source db/schema.sql" once successful, run "quit". Follow the link below in Usage, and your site will be up and running waiting for new posts. 
 
 ## Usage
 This is what it will look like on your device. 
 
-[Baby Aid](heroku site)
+[Baby Aid](https://calm-fortress-46248.herokuapp.com/)
 
 ![Baby Aid](./public/images/screenshot.png)
 
