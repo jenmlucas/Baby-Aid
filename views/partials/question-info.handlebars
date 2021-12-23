@@ -10,7 +10,9 @@
                     {{answers.length}} {{format_plural "answer" answers.length}}
                     with {{vote_count}} {{format_plural "point" vote_count}}
                 </p>
+                {{#if removeSeePostLink}}
                 <a href="/question/{{id}}" class="btn btn-primary stretched-link">See post</a>
+                {{/if}}
         </div>
     </div>
 </article>

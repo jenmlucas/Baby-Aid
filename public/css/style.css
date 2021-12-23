@@ -19,8 +19,13 @@ main {
 
 .hero {
     text-align: center;
-    font-weight: bold;
-    
+    font-weight: 900;
+    color: #12bb61;
+    font-size: 100px; 
+    -moz-text-stroke-color: black;
+    -webkit-text-stroke-color: black;
+    -moz-text-stroke-width: 2px;  
+    -webkit-text-stroke-width: 2px;
 }
  
 #bottom-footer {
