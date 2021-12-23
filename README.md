@@ -19,7 +19,7 @@ This is what it will look like on your device.
 
 [Baby Aid](heroku site)
 
-![Baby Aid](add screenshot)
+![Baby Aid](./public/images/screenshot.png)
 
 ## License 
 N/A
